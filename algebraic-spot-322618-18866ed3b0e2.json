@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "algebraic-spot-322618",
+  "private_key_id": "18866ed3b0e298ab9ad80d9a5102c40f13c810f1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCUueGkaYujj45A\no4n5GH39qKb/oR60srz8F+6+Q0veby9ViGfURUUJsO1IeQ+FZmQc7oyaWAoDGJ9f\nNA07woWvk6pgg79mf7EYKkyzwb/7+fJLgGYnWQyM3Igegx55jVwTUP04U4IDP+K2\n0Vr3Zcaa7k8IBaDJzbdWo59XcBzWrXhQBTlvK9Pp1MihaEzSABqdao+5zA4sxnIo\nNuDIjrNsL3mOrV7sJB4VkXPQtdBXEZklEfFEv9DoJMeym0YwMizp9Q8T2484C3X3\nWLytDyDYqh+Chn9s3Thv6b/1yvFjpH4m9yidofFqskRmmST0UsDOPFvpcQQIBsFZ\nxZaCRIM7AgMBAAECggEABpinjnRUVxJ6M5mG3sKJOzOWBvcQieD2Xjn56Uj9avKq\n4ODJaVISY03yrQjnH6DW2axzSP8ubOYhLDnk4ly/M1ymk496vdZcNoWqj27aKUta\nXzxLi5afM2CVAVsKAkfuQjiqQN7KgLYxkHxnMls6iUsx7yZzJxaVxjGnBg8SmfgL\nWg5eKGZe20AVAXnmB32M3logOhpkV/imatmLmEnJ496AqadJBo+c2buDnPeYOFwd\n746S41eCeTetXFe8UxbRkH6vd3wr5gpICdMaV1SbFzG/23xYWHxrOzMYEjPwThd/\nQgV7nnSGZSnj05IXSFjVSfFuqQqZZEncs8pbcxhOrQKBgQDD/RuLMdpKvLAXo/Iv\nr120qQc/OqUVWUhQ3eTmdqrb5TUPcbAPyXOoC3i6JgwkfIoFs1oTIY+OVAPbM8yb\n9TNNhdAXFVub5gM2nKatY0G7n754gCc786Vevjic1rAzO7lWZwoC1JrGNAp3u1IQ\ngCQWvgHp9aaf8D3VxESgnm+1VwKBgQDCRASe6LIwuTFQ5eJPbPOfSiB8qZV2pktk\nfVOD4I9WnpLLZuDERslrd36RchWa6Zq0pll1f026TUUY2MqJiSozE43E+fXxRrC0\nlj8X0c7xkNAv1d5yNfXdccIKdiVCCGf1UV2RhVcrWLtjPbbNx/2WVBYSKIXpav/s\nGVfGOrouvQKBgQCSDyocxS1ir1YoeBUAdpfGEIYHGCR5UY10PrndCyjwMdQmS1qj\nmUVpQgtZ5wr7khimgPAq+8LpljE9hlABFm6CYqwe19rqxzMz2vDYnPUa58TiNteG\ndWCTx/2W3OR5ehP4kVfDnkAuYBBBBMf25hh/HmF8w4bHARqEGf3vGcQ0hwKBgHzn\n8vihsYC2ckkLpjlfWj0/EihVeW5yeeNA2aPfjQoqp0P0/+vzf6qDiHPIILAcJ4aj\ntr1ffwCckiLpsUBBW0q/9dWCymm6A//44tRT6HVVoSZAouhYXZ9md1b2o/oTIZSQ\nHlNkoqmSQdoLYjBpuFkh85b1SzTLwYVyvgcM140ZAoGAX7nEGAgoBWlfDpnhQ+9Z\n993rmntLWaxCS59h+swt6SDXgINdpIP2gaz1fTgINJ/+Qs+jbqItvn6ayGaeZXVM\ngeg8YphLB7uwKv/8GHS4wDq7ccnrRowrIVbAfWadVtfuPfw/I6DgnroQvROXE0D9\nkBVnma3IUfEBmvkHqHJLSmM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "collectionhub-service@algebraic-spot-322618.iam.gserviceaccount.com",
+  "client_id": "108088881062476586470",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/collectionhub-service%40algebraic-spot-322618.iam.gserviceaccount.com"
+}

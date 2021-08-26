@@ -1,0 +1,176 @@
+@page "{id}"
+@model CollectionHub.Areas.Identity.Pages.Account.Manage.ManageCollectionFields
+
+@{
+    ViewData["Title"] = "Manage collection fields";
+    ViewData["ActivePage"] = null;
+}
+
+<h4>@Model.Collection.Name</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Model.Collection.ImageUrl" class="img-fluid img-thumbnail" alt="">
+    </div>
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="validation text-danger"></div>
+            <input asp-for="Collection.Id" type="hidden">
+            <div class="form-group">
+                <label asp-for="Collection.Name"></label>
+                <input asp-for="Collection.Name" class="form-control" value="@Model.Collection.Name">
+                <span asp-validation-for="Collection.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Collection.Theme"></label>
+                <input asp-for="Collection.Theme" class="form-control" value="@Model.Collection.Theme">
+                <span asp-validation-for="Collection.Theme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Collection.ShortDescription"></label>
+                <input asp-for="Collection.ShortDescription" class="form-control" value="@Model.Collection.ShortDescription">
+                <span asp-validation-for="Collection.ShortDescription" class="text-danger"></span>
+            </div>
+            <label asp-for="Collection.ImageFile"></label>
+            <div class="form-group" id="drop-zone">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-secondary">Choose or drag the file</p>
+                        <label for="file-input" type="button" id="file-input-label" class="btn btn-primary">Choose file</label>
+                        <input asp-for="Collection.ImageFile" class="form-control" id="file-input" accept="image/*">
+                    </div>
+                    <div id="gallery" class="col-md-6">
+                    </div>
+                </div>
+            </div>
+            <span asp-validation-for="Collection.ImageFile" class="text-danger"></span>
+            <div class="form-group">
+                <input asp-for="Collection.ImageUrl" class="form-control" type="hidden">
+            </div>
+            <div class="form-group">
+                <input asp-for="Collection.ImageStorageName" class="form-control" type="hidden">
+            </div>
+            @if (Model.Collection.FirstOptionalBoolFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.FirstOptionalBoolFieldName"></label>
+                    <input asp-for="Collection.FirstOptionalBoolFieldName" class="form-control" value="@Model.Collection.FirstOptionalBoolFieldName">
+                    <span asp-validation-for="Collection.FirstOptionalBoolFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalBoolFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.SecondOptionalBoolFieldName"></label>
+                    <input asp-for="Collection.SecondOptionalBoolFieldName" class="form-control" value="@Model.Collection.SecondOptionalBoolFieldName">
+                    <span asp-validation-for="Collection.SecondOptionalBoolFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalBoolFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.ThirdOptionalBoolFieldName"></label>
+                    <input asp-for="Collection.ThirdOptionalBoolFieldName" class="form-control" value="@Model.Collection.ThirdOptionalBoolFieldName">
+                    <span asp-validation-for="Collection.ThirdOptionalBoolFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalDateTimeFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.FirstOptionalDateTimeFieldName"></label>
+                    <input asp-for="Collection.FirstOptionalDateTimeFieldName" class="form-control" value="@Model.Collection.FirstOptionalDateTimeFieldName">
+                    <span asp-validation-for="Collection.FirstOptionalDateTimeFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalDateTimeFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.SecondOptionalDateTimeFieldName"></label>
+                    <input asp-for="Collection.SecondOptionalDateTimeFieldName" class="form-control" value="@Model.Collection.SecondOptionalDateTimeFieldName">
+                    <span asp-validation-for="Collection.SecondOptionalDateTimeFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalDateTimeFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.ThirdOptionalDateTimeFieldName"></label>
+                    <input asp-for="Collection.ThirdOptionalDateTimeFieldName" class="form-control" value="@Model.Collection.ThirdOptionalDateTimeFieldName">
+                    <span asp-validation-for="Collection.ThirdOptionalDateTimeFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalNumberFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.FirstOptionalNumberFieldName"></label>
+                    <input asp-for="Collection.FirstOptionalNumberFieldName" class="form-control" value="@Model.Collection.FirstOptionalNumberFieldName">
+                    <span asp-validation-for="Collection.FirstOptionalNumberFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalNumberFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.SecondOptionalNumberFieldName"></label>
+                    <input asp-for="Collection.SecondOptionalNumberFieldName" class="form-control" value="@Model.Collection.SecondOptionalNumberFieldName">
+                    <span asp-validation-for="Collection.SecondOptionalNumberFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalNumberFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.ThirdOptionalNumberFieldName"></label>
+                    <input asp-for="Collection.ThirdOptionalNumberFieldName" class="form-control" value="@Model.Collection.ThirdOptionalNumberFieldName">
+                    <span asp-validation-for="Collection.ThirdOptionalNumberFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalStringFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.FirstOptionalStringFieldName"></label>
+                    <input asp-for="Collection.FirstOptionalStringFieldName" class="form-control" value="@Model.Collection.FirstOptionalStringFieldName">
+                    <span asp-validation-for="Collection.FirstOptionalStringFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalStringFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.SecondOptionalStringFieldName"></label>
+                    <input asp-for="Collection.SecondOptionalStringFieldName" class="form-control" value="@Model.Collection.SecondOptionalStringFieldName">
+                    <span asp-validation-for="Collection.SecondOptionalStringFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalStringFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.ThirdOptionalStringFieldName"></label>
+                    <input asp-for="Collection.ThirdOptionalStringFieldName" class="form-control" value="@Model.Collection.ThirdOptionalStringFieldName">
+                    <span asp-validation-for="Collection.ThirdOptionalStringFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalTextFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.FirstOptionalTextFieldName"></label>
+                    <input asp-for="Collection.FirstOptionalTextFieldName" class="form-control" value="@Model.Collection.FirstOptionalTextFieldName">
+                    <span asp-validation-for="Collection.FirstOptionalTextFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalTextFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.SecondOptionalTextFieldName"></label>
+                    <input asp-for="Collection.SecondOptionalTextFieldName" class="form-control" value="@Model.Collection.SecondOptionalTextFieldName">
+                    <span asp-validation-for="Collection.SecondOptionalTextFieldName"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalTextFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Collection.ThirdOptionalTextFieldName"></label>
+                    <input asp-for="Collection.ThirdOptionalTextFieldName" class="form-control" value="@Model.Collection.ThirdOptionalTextFieldName">
+                    <span asp-validation-for="Collection.ThirdOptionalTextFieldName"></span>
+                </div>
+            }
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

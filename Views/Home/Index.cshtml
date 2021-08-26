@@ -1,0 +1,275 @@
+﻿@using CollectionHub.Data
+@model List<Item>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+<div class="col-sm-3">
+    <div class="row">
+        <div class="col-12">
+            <nav id="items-nav" class="navbar navbar-light bg-light flex-column align-items-stretch position-fixed d-none d-md-block">
+                <a class="navbar-brand" href="#">Items</a>
+                <nav class="nav nav-pills flex-column">
+                    @foreach (var (item, _) in (Dictionary<Item, Collection>)ViewData["ItemCollectionDictionary"])
+                    {
+                        <a class="nav-link" href="#@item.Id">@item.Name</a>
+                    }
+                </nav>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="col-sm-9">
+<div class="row">
+    <div class="col-12">
+        <h3> Recent items </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6" data-bs-spy="scroll" data-bs-target="#items-nav" data-bs-offset="0" tabindex="0">
+        @foreach (var (item, collection) in (Dictionary<Item, Collection>)ViewData["itemCollectionDictionary"])
+        {
+            <div class="row jumbotron" id="@item.Id">
+                <div class="col-sm-6 text-secondary">
+                    <div class="row">
+                        @{ var itemUserDictionary = (Dictionary<Item, ApplicationUser>)ViewData["ItemUserDictionary"]; }
+                        <div class="col-12">
+                            <h4> @collection.Name </h4>
+                            <img class="img-fluid img-thumbnail" src="@collection.ImageUrl" alt="Collection Image">
+                            <p class="text-secondary">
+                                @itemUserDictionary[item].UserName;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h4> @item.Name </h4>
+                        </div>
+                        <div class="col-sm-7">
+                            <h6 class="text-secondary"> @item.PublicationDate.ToString("g") </h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.FirstOptionalBoolFieldVisible)
+                            {
+                                var answer = item.FirstOptionalBoolField ? "yes" : "no";
+                                <p class="text-secondary">
+                                    @collection.FirstOptionalBoolFieldName: @answer
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.SecondOptionalBoolFieldVisible)
+                            {
+                                var answer = item.SecondOptionalBoolField ? "yes" : "no";
+                                <p class="text-secondary">
+                                    @collection.SecondOptionalBoolFieldName: @answer
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.ThirdOptionalBoolFieldVisible)
+                            {
+                                var answer = item.ThirdOptionalBoolField ? "yes" : "no";
+                                <p class="text-secondary">
+                                    @collection.ThirdOptionalBoolFieldName: @answer
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.SecondOptionalBoolFieldVisible)
+                            {
+                                var answer = item.SecondOptionalBoolField ? "yes" : "no";
+                                <p class="text-secondary">
+                                    @collection.SecondOptionalBoolFieldName: @answer
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.FirstOptionalDateTimeFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.FirstOptionalDateTimeFieldName: @item.FirstOptionalDateTimeField.ToShortDateString()
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.FirstOptionalDateTimeFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.FirstOptionalDateTimeFieldName: @item.FirstOptionalDateTimeField.ToShortDateString()
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.SecondOptionalDateTimeFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.SecondOptionalDateTimeFieldName: @item.SecondOptionalDateTimeField.ToShortDateString()
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.ThirdOptionalDateTimeFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.ThirdOptionalDateTimeFieldName: @item.ThirdOptionalDateTimeField.ToShortDateString()
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.FirstOptionalNumberFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.FirstOptionalNumberFieldName: @item.FirstOptionalNumberField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.SecondOptionalNumberFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.SecondOptionalNumberFieldName: @item.SecondOptionalNumberField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.ThirdOptionalNumberFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.ThirdOptionalNumberFieldName: @item.ThirdOptionalNumberField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.FirstOptionalStringFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.FirstOptionalStringFieldName: @item.FirstOptionalStringField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.SecondOptionalStringFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.SecondOptionalStringFieldName: @item.SecondOptionalStringField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.ThirdOptionalStringFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.ThirdOptionalStringFieldName: @item.ThirdOptionalStringField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.FirstOptionalTextFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.FirstOptionalTextFieldName: @item.FirstOptionalTextField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.SecondOptionalTextFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.SecondOptionalTextFieldName: @item.SecondOptionalTextField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @if (collection.ThirdOptionalTextFieldVisible)
+                            {
+                                <p class="text-secondary">
+                                    @collection.ThirdOptionalTextFieldName: @item.ThirdOptionalTextField
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @{ var itemTagsDictionary = (Dictionary<Item, string>)ViewData["ItemTagsDictionary"]; }
+                            <p class="text-secondary">Tags: @itemTagsDictionary[item]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-5 ml-5">
+        @foreach (var collection in (List<Collection>)ViewData["CollectionsWithMostItems"])
+        {
+            <div class="row jumbotron">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>@collection.Name</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="text-secondary">
+                                @collection.Theme
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <img class="img-fluid img-thumbnail" src="@collection.ImageUrl" alt="collection image">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-secondary">
+                                @collection.ShortDescription
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>
+</div>

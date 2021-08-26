@@ -1,0 +1,176 @@
+@page
+@model CollectionHub.Areas.Identity.Pages.Account.Manage.AddNewCollection
+
+@{
+    ViewData["Title"] = "New collection";
+    ViewData["ActivePage"] = ManageNavPages.AddNewCollection;
+}
+
+<h4 xmlns="http://www.w3.org/1999/html">@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="validation text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ApplicationUser.UserName"></label>
+                <input asp-for="ApplicationUser.UserName" class="form-control" disabled/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Collection.Name"></label>
+                <input asp-for="Collection.Name" class="form-control">
+                <span asp-validation-for="Collection.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Collection.Theme"></label>
+                <input asp-for="Collection.Theme" class="form-control">
+                <span asp-validation-for="Collection.Theme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Collection.ShortDescription"></label>
+                <input asp-for="Collection.ShortDescription" class="form-control">
+                <span asp-validation-for="Collection.ShortDescription" class="text-danger"></span>
+            </div>
+            <label asp-for="Collection.ImageFile"></label>
+            <div class="form-group" id="drop-zone">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-secondary">Choose or drag the file</p>
+                        <label for="file-input" type="button" id="file-input-label" class="btn btn-primary">Choose file</label>
+                        <input asp-for="Collection.ImageFile" class="form-control" id="file-input" accept="image/*">
+                    </div>
+                    <div id="gallery" class="col-md-6">
+                        
+                    </div>
+                </div>
+            </div>
+            <span asp-validation-for="Collection.ImageFile" class="text-danger"></span>
+            
+            <div>
+                <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" 
+                        data-display="static" aria-haspopup="true" aria-expanded="false">
+                    Add checkboxes
+                </button>
+                <div class="dropdown-menu dropdown-form p-3">
+                    <div class="form-group">
+                        <label asp-for="Collection.FirstOptionalBoolFieldName"></label>
+                        <input asp-for="Collection.FirstOptionalBoolFieldName" class="form-control">
+                        <span asp-validation-for="Collection.FirstOptionalBoolFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.SecondOptionalBoolFieldName"></label>
+                        <input asp-for="Collection.SecondOptionalBoolFieldName" class="form-control">
+                        <span asp-validation-for="Collection.SecondOptionalBoolFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.ThirdOptionalBoolFieldName"></label>
+                        <input asp-for="Collection.ThirdOptionalBoolFieldName" class="form-control">
+                        <span asp-validation-for="Collection.ThirdOptionalBoolFieldName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown"
+                        data-display="static" aria-haspopup="true" aria-expanded="false">
+                    Add DateTime fields
+                </button>
+                <div class="dropdown-menu dropdown-form p-3">
+                    <div class="form-group">
+                        <label asp-for="Collection.FirstOptionalDateTimeFieldName"></label>
+                        <input asp-for="Collection.FirstOptionalDateTimeFieldName" class="form-control">
+                        <span asp-validation-for="Collection.FirstOptionalDateTimeFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.SecondOptionalDateTimeFieldName"></label>
+                        <input asp-for="Collection.SecondOptionalDateTimeFieldName" class="form-control">
+                        <span asp-validation-for="Collection.SecondOptionalDateTimeFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.ThirdOptionalDateTimeFieldName"></label>
+                        <input asp-for="Collection.ThirdOptionalDateTimeFieldName" class="form-control">
+                        <span asp-validation-for="Collection.ThirdOptionalDateTimeFieldName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown"
+                        data-display="static" aria-haspopup="true" aria-expanded="false">
+                    Add number fields
+                </button>
+                <div class="dropdown-menu dropdown-form p-3">
+                    <div class="form-group">
+                        <label asp-for="Collection.FirstOptionalNumberFieldName"></label>
+                        <input asp-for="Collection.FirstOptionalNumberFieldName" class="form-control">
+                        <span asp-validation-for="Collection.FirstOptionalNumberFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.SecondOptionalNumberFieldName"></label>
+                        <input asp-for="Collection.SecondOptionalNumberFieldName" class="form-control">
+                        <span asp-validation-for="Collection.SecondOptionalNumberFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.ThirdOptionalNumberFieldName"></label>
+                        <input asp-for="Collection.ThirdOptionalNumberFieldName" class="form-control">
+                        <span asp-validation-for="Collection.ThirdOptionalNumberFieldName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown"
+                        data-display="static" aria-haspopup="true" aria-expanded="false">
+                    Add string fields
+                </button>
+                <div class="dropdown-menu dropdown-form p-3">
+                    <div class="form-group">
+                        <label asp-for="Collection.FirstOptionalStringFieldName"></label>
+                        <input asp-for="Collection.FirstOptionalStringFieldName" class="form-control">
+                        <span asp-validation-for="Collection.FirstOptionalStringFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.SecondOptionalStringFieldName"></label>
+                        <input asp-for="Collection.SecondOptionalStringFieldName" class="form-control">
+                        <span asp-validation-for="Collection.SecondOptionalStringFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.ThirdOptionalStringFieldName"></label>
+                        <input asp-for="Collection.ThirdOptionalStringFieldName" class="form-control">
+                        <span asp-validation-for="Collection.ThirdOptionalStringFieldName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown"
+                        data-display="static" aria-haspopup="true" aria-expanded="false">
+                    Add text fields
+                </button>
+                <div class="dropdown-menu dropdown-form p-3">
+                    <div class="form-group">
+                        <label asp-for="Collection.FirstOptionalTextFieldName"></label>
+                        <input asp-for="Collection.FirstOptionalTextFieldName" class="form-control">
+                        <span asp-validation-for="Collection.FirstOptionalTextFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.SecondOptionalTextFieldName"></label>
+                        <input asp-for="Collection.SecondOptionalTextFieldName" class="form-control">
+                        <span asp-validation-for="Collection.SecondOptionalTextFieldName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Collection.ThirdOptionalTextFieldName"></label>
+                        <input asp-for="Collection.ThirdOptionalTextFieldName" class="form-control">
+                        <span asp-validation-for="Collection.ThirdOptionalTextFieldName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-3">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,290 @@
+@page "{id}"
+@model CollectionHub.Areas.Identity.Pages.Account.Manage.ManageCollection
+
+@{
+    ViewData["Title"] = "Manage collection";
+    ViewData["ActivePage"] = null;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="col-md-6 text-right">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#sortItemsModal"><i class="fa fa-solid fa-sort"></i></button>
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#filterItemsModal"><i class="fa fa-solid fa-filter"></i></button>
+    </div>
+</div>
+
+<div class="modal fade" id="sortItemsModal" tabindex="-1" role="dialog" aria-labelledby="sortItemsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" asp-page-handler="sort" asp-all-route-id="@Model.Collection.Id">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-left" id="sortItemsModalLabel">Sort items</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" id="oldestItems" value="OldestItems">
+                        <label for="oldestItems" class="form-check-label">
+                            Oldest items
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" id="recentItems" value="RecentItems">
+                        <label for="recentItems" class="form-check-label">
+                            Recent items
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" id="alphabeticAsc" value="AlphabeticAsc">
+                        <label for="alphabeticAsc" class="form-check-label">
+                            Sort alphabetically in ascending order
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sortOrder" id="alphabeticDesc" value="AlphabeticDesc">
+                        <label for="alphabeticDesc" class="form-check-label">
+                            Sort alphabetically in descending order
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="filterItemsModal" tabindex="-1" role="dialog" aria-labelledby="filterItemsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" asp-page-handler="filter" asp-all-route-id="@Model.Collection.Id">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-left">Filter</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="itemNameFilter">Filter by item name</label>
+                    <input type="text" name="itemNameFilter" id="itemNameFilter" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<form method="post" asp-all-route-data='new Dictionary<string, string> { { "id", Model.Collection.Id.ToString() } }'>
+    <div class="row">
+        <div class="col-12">
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="@Model.Collection.ImageUrl" class="img-fluid img-thumbnail" alt="">
+                </div>
+                <div class="col-md-6">
+                    <a asp-page="ManageCollectionFields" asp-all-route-data='new Dictionary<string, string> { { "id", Model.Collection.Id.ToString() } }'>
+                        <h4>@Model.Collection.Name</h4>
+                    </a>
+                    <h5 class="text-secondary">@Model.Collection.Theme</h5>
+                    <p class="text-secondary">@Model.Collection.ShortDescription</p>
+                    <p class="text-secondary">@Model.OptionalBoolFieldsCount Boolean fields</p>
+                    <p class="text-secondary">@Model.OptionalDateTimeFieldsCount Datetime fields</p>
+                    <p class="text-secondary">@Model.OptionalNumberFieldsCount Number fields</p>
+                    <p class="text-secondary">@Model.OptionalStringFieldsCount String fields</p>
+                    <p class="text-secondary">@Model.OptionalTextFieldsCount Text fields</p>
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <h5>@Model.Collection.Items.Count item(-s)</h5>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button type="submit" class="btn btn-danger" id="deleteCollections"><i class="fa fa-minus"></i></button>
+                            <a asp-page="AddNewItem" asp-all-route-data='new Dictionary<string, string> { { "id", Model.Collection.Id.ToString() } }'>
+                                <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @foreach (var item in Model.Items)
+            {
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <a asp-page="ManageItem" asp-all-route-data='new Dictionary<string, string> { { "id", item.Id.ToString() } }'>
+                            <h5>@item.Name</h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.FirstOptionalBoolFieldVisible)
+                        {
+                            var answer = item.FirstOptionalBoolField ? "yes" : "no";
+                            <p class="text-secondary">
+                                @Model.Collection.FirstOptionalBoolFieldName: @answer
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.SecondOptionalBoolFieldVisible)
+                        {
+                            var answer = item.SecondOptionalBoolField ? "yes" : "no";
+                            <p class="text-secondary">
+                                @Model.Collection.SecondOptionalBoolFieldName: @answer
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.ThirdOptionalBoolFieldVisible)
+                        {
+                            var answer = item.ThirdOptionalBoolField ? "yes" : "no";
+                            <p class="text-secondary">
+                                @Model.Collection.ThirdOptionalBoolFieldName: @answer
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.FirstOptionalDateTimeFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.FirstOptionalDateTimeFieldName: @item.FirstOptionalDateTimeField.ToShortDateString()
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.SecondOptionalDateTimeFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.SecondOptionalDateTimeFieldName: @item.SecondOptionalDateTimeField.ToShortDateString()
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.ThirdOptionalDateTimeFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.ThirdOptionalDateTimeFieldName: @item.ThirdOptionalDateTimeField.ToShortDateString()
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.FirstOptionalNumberFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.FirstOptionalNumberFieldName: @item.FirstOptionalNumberField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.SecondOptionalNumberFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.SecondOptionalNumberFieldName: @item.SecondOptionalNumberField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.ThirdOptionalNumberFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.ThirdOptionalNumberFieldName: @item.ThirdOptionalNumberField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.FirstOptionalStringFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.FirstOptionalStringFieldName: @item.FirstOptionalStringField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.SecondOptionalStringFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.SecondOptionalStringFieldName: @item.SecondOptionalStringField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.ThirdOptionalStringFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.ThirdOptionalStringFieldName: @item.ThirdOptionalStringField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.FirstOptionalTextFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.FirstOptionalTextFieldName: @item.FirstOptionalTextField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.SecondOptionalTextFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.SecondOptionalTextFieldName: @item.SecondOptionalTextField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (Model.Collection.ThirdOptionalTextFieldVisible)
+                        {
+                            <p class="text-secondary">
+                                @Model.Collection.ThirdOptionalTextFieldName: @item.ThirdOptionalTextField
+                            </p>
+                        }
+                    </div>
+                </div>
+                <p class="text-secondary">
+                    Tags(@item.Tags.Count): @Model.TagDictionary[item]
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" name="selectedItemsIds" class="form-check-input" value="@item.Id" id="@item.Id">
+                            <label class="form-check-label" for="@item.Id">Delete item</label>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</form>

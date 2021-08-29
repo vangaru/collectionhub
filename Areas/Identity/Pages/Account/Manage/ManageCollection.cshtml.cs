@@ -220,6 +220,7 @@ namespace CollectionHub.Areas.Identity.Pages.Account.Manage
         private async Task DeleteItemIfNotNullAsync(Item itemToDelete)
         {
             if (itemToDelete == null) return;
+            _dbContext.Tags.RemoveRange(itemToDelete.Tags);
             _dbContext.Items.Remove(itemToDelete);
             await _dbContext.SaveChangesAsync();
         }

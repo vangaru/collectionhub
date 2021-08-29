@@ -91,7 +91,7 @@
                         <h4>@Model.Collection.Name</h4>
                     </a>
                     <h5 class="text-secondary">@Model.Collection.Theme</h5>
-                    <p class="text-secondary">@Model.Collection.ShortDescription</p>
+                    <p class="text-secondary">@Html.Raw(Model.Collection.ShortDescription)</p>
                     <p class="text-secondary">@Model.OptionalBoolFieldsCount Boolean fields</p>
                     <p class="text-secondary">@Model.OptionalDateTimeFieldsCount Datetime fields</p>
                     <p class="text-secondary">@Model.OptionalNumberFieldsCount Number fields</p>
@@ -247,8 +247,8 @@
                     <div class="col-12">
                         @if (Model.Collection.FirstOptionalTextFieldVisible)
                         {
-                            <p class="text-secondary">
-                                @Model.Collection.FirstOptionalTextFieldName: @item.FirstOptionalTextField
+                            <p>
+                                @Model.Collection.FirstOptionalTextFieldName: @Html.Raw(item.FirstOptionalTextField)
                             </p>
                         }
                     </div>
@@ -257,8 +257,8 @@
                     <div class="col-12">
                         @if (Model.Collection.SecondOptionalTextFieldVisible)
                         {
-                            <p class="text-secondary">
-                                @Model.Collection.SecondOptionalTextFieldName: @item.SecondOptionalTextField
+                            <p>
+                                @Model.Collection.SecondOptionalTextFieldName: @Html.Raw(item.SecondOptionalTextField)
                             </p>
                         }
                     </div>
@@ -267,8 +267,8 @@
                     <div class="col-12">
                         @if (Model.Collection.ThirdOptionalTextFieldVisible)
                         {
-                            <p class="text-secondary">
-                                @Model.Collection.ThirdOptionalTextFieldName: @item.ThirdOptionalTextField
+                            <p>
+                                @Model.Collection.ThirdOptionalTextFieldName: @Html.Raw(item.ThirdOptionalTextField)
                             </p>
                         }
                     </div>

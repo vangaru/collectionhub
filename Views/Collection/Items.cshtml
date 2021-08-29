@@ -1,0 +1,306 @@
+@model CollectionPageViewModel
+
+@{
+    ViewData["Title"] = "Collection";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="@Model.Collection.ImageUrl" alt="collection image">
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    @if (User.IsInRole("admin"))
+                    {
+                        <div class="col-12">
+                            <a asp-area="Identity" asp-page="/Account/Manage/ManageCollection" asp-all-route-data='new Dictionary<string, string> { { "id", Model.Collection.Id.ToString() } }'>
+                                <h4>@Model.Collection.Name</h4>
+                            </a>
+                        </div>   
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <h4>@Model.Collection.Name</h4>
+                        </div>
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="text-secondary">
+                            @Model.Collection.Theme
+                        </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="text-secondary">@Model.Author.UserName</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>
+                            @Html.Raw(Model.Collection.ShortDescription)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4> @Model.Collection.Items.Count Items </h4>
+                @foreach (var item in Model.Items)
+                {
+                    <div class="row jumbotron">
+                        <div class="col-12">
+                            <div class="row">
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <a asp-area="Identity" asp-page="/Account/Manage/ManageItem" asp-all-route-data='new Dictionary<string, string> { { "id", item.Id.ToString() } }'>
+                                        <div class="col-sm-6">
+                                            <h5> @item.Name </h5>
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-6 text-right">
+                                        @item.PublicationDate.ToString("g")
+                                    </div>
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    
+                                    @if (Model.Collection.FirstOptionalBoolFieldVisible)
+                                    {
+                                        var answer = item.FirstOptionalBoolField ? "yes" : "no";
+                                        <p class="text-secondary">
+                                            @Model.Collection.FirstOptionalBoolFieldName: @answer
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    
+                                    @if (Model.Collection.SecondOptionalBoolFieldVisible)
+                                    {
+                                        var answer = item.SecondOptionalBoolField ? "yes" : "no";
+                                        <p class="text-secondary">
+                                            @Model.Collection.SecondOptionalBoolFieldName: @answer
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.ThirdOptionalBoolFieldVisible)
+                                    {
+                                        var answer = item.ThirdOptionalBoolField ? "yes" : "no";
+                                        <p class="text-secondary">
+                                            @Model.Collection.ThirdOptionalBoolFieldName: @answer
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.SecondOptionalBoolFieldVisible)
+                                    {
+                                        var answer = item.SecondOptionalBoolField ? "yes" : "no";
+                                        <p class="text-secondary">
+                                            @Model.Collection.SecondOptionalBoolFieldName: @answer
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.FirstOptionalDateTimeFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.FirstOptionalDateTimeFieldName: @item.FirstOptionalDateTimeField.ToShortDateString()
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.FirstOptionalDateTimeFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.FirstOptionalDateTimeFieldName: @item.FirstOptionalDateTimeField.ToShortDateString()
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.SecondOptionalDateTimeFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.SecondOptionalDateTimeFieldName: @item.SecondOptionalDateTimeField.ToShortDateString()
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.ThirdOptionalDateTimeFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.ThirdOptionalDateTimeFieldName: @item.ThirdOptionalDateTimeField.ToShortDateString()
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.FirstOptionalNumberFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.FirstOptionalNumberFieldName: @item.FirstOptionalNumberField
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.SecondOptionalNumberFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.SecondOptionalNumberFieldName: @item.SecondOptionalNumberField
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.ThirdOptionalNumberFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.ThirdOptionalNumberFieldName: @item.ThirdOptionalNumberField
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.FirstOptionalStringFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.FirstOptionalStringFieldName: @item.FirstOptionalStringField
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.SecondOptionalStringFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.SecondOptionalStringFieldName: @item.SecondOptionalStringField
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.ThirdOptionalStringFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.ThirdOptionalStringFieldName: @item.ThirdOptionalStringField
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.FirstOptionalTextFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.FirstOptionalTextFieldName: @Html.Raw(item.FirstOptionalTextField)
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.SecondOptionalTextFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.SecondOptionalTextFieldName: @Html.Raw(item.SecondOptionalTextField)
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Model.Collection.ThirdOptionalTextFieldVisible)
+                                    {
+                                        <p class="text-secondary">
+                                            @Model.Collection.ThirdOptionalTextFieldName: @Html.Raw(item.ThirdOptionalTextField)
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-secondary">
+                                        @Model.ItemTagsDictionary[item]
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <nav aria-label="pagination">
+                    <ul class="pagination">
+                        @{
+                            var pageItemClasses = "page-item";
+                            if (!Model.PaginationModel.HasPreviousPage)
+                            {
+                                pageItemClasses += " disabled";
+                            }
+                        }
+                        <li class="@pageItemClasses">
+                            @{ var prevPage = Model.PaginationModel.PageNumber - 1; }
+                            <a class="page-link" asp-action="Items" asp-route-collectionId="@Model.Collection.Id" asp-route-pageNumber="@prevPage">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">
+                                @(Model.PaginationModel.PageNumber + 1)
+                            </a>
+                        </li>
+                        @{
+                            pageItemClasses = "page-item";
+                            if (!Model.PaginationModel.HasNextPage)
+                            {
+                                pageItemClasses += " disabled";
+                            }
+                        }
+                        <li class="@pageItemClasses">
+                            @{ var nextPage = Model.PaginationModel.PageNumber + 1; }
+                            <a class="page-link" asp-action="Items" asp-route-collectionId="@Model.Collection.Id" asp-route-pageNumber="@nextPage">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

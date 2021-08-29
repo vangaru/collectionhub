@@ -1,53 +1,39 @@
-﻿@using CollectionHub.Data
-@model List<Item>
+﻿@model IndexPageViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
-<div class="col-sm-3">
-    <div class="row">
-        <div class="col-12">
-            <nav id="items-nav" class="navbar navbar-light bg-light flex-column align-items-stretch position-fixed d-none d-md-block">
-                <a class="navbar-brand" href="#">Items</a>
-                <nav class="nav nav-pills flex-column">
-                    @foreach (var (item, _) in (Dictionary<Item, Collection>)ViewData["ItemCollectionDictionary"])
-                    {
-                        <a class="nav-link" href="#@item.Id">@item.Name</a>
-                    }
-                </nav>
-            </nav>
-        </div>
-    </div>
-</div>
-<div class="col-sm-9">
+<div class="col-12">
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-7 m-2 order-lg-1 order-md-2 order-sm-2 order-2">
         <h3> Recent items </h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6" data-bs-spy="scroll" data-bs-target="#items-nav" data-bs-offset="0" tabindex="0">
-        @foreach (var (item, collection) in (Dictionary<Item, Collection>)ViewData["itemCollectionDictionary"])
+        @foreach (var (item, collection) in Model.ItemCollectionDictionary)
         {
-            <div class="row jumbotron" id="@item.Id">
-                <div class="col-sm-6 text-secondary">
+            <div class="row jumbotron d-flex" id="@item.Id">
+                <div class="col-12">
+                    @{ var itemUserDictionary = Model.ItemUserDictionary; }
+                    <p class="text-secondary">
+                        @itemUserDictionary[item].UserName
+                    </p>
+                </div>
+                <div class="col-sm-5 text-secondary">
                     <div class="row">
-                        @{ var itemUserDictionary = (Dictionary<Item, ApplicationUser>)ViewData["ItemUserDictionary"]; }
                         <div class="col-12">
-                            <h4> @collection.Name </h4>
+                            <h4>
+                                <a asp-controller="Collection" asp-action="Items" asp-route-collectionId="@collection.Id">
+                                    @collection.Name
+                                </a>
+                            </h4>
                             <img class="img-fluid img-thumbnail" src="@collection.ImageUrl" alt="Collection Image">
-                            <p class="text-secondary">
-                                @itemUserDictionary[item].UserName;
-                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                     <div class="row">
                         <div class="col-sm-5">
-                            <h4> @item.Name </h4>
+                            <h5> @item.Name </h5>
                         </div>
                         <div class="col-sm-7">
                             <h6 class="text-secondary"> @item.PublicationDate.ToString("g") </h6>
@@ -202,7 +188,7 @@
                             @if (collection.FirstOptionalTextFieldVisible)
                             {
                                 <p class="text-secondary">
-                                    @collection.FirstOptionalTextFieldName: @item.FirstOptionalTextField
+                                    @collection.FirstOptionalTextFieldName: @Html.Raw(item.FirstOptionalTextField)
                                 </p>
                             }
                         </div>
@@ -212,7 +198,7 @@
                             @if (collection.SecondOptionalTextFieldVisible)
                             {
                                 <p class="text-secondary">
-                                    @collection.SecondOptionalTextFieldName: @item.SecondOptionalTextField
+                                    @collection.SecondOptionalTextFieldName: @Html.Raw(item.SecondOptionalTextField)
                                 </p>
                             }
                         </div>
@@ -222,36 +208,41 @@
                             @if (collection.ThirdOptionalTextFieldVisible)
                             {
                                 <p class="text-secondary">
-                                    @collection.ThirdOptionalTextFieldName: @item.ThirdOptionalTextField
+                                    @collection.ThirdOptionalTextFieldName: @Html.Raw(item.ThirdOptionalTextField)
                                 </p>
                             }
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            @{ var itemTagsDictionary = (Dictionary<Item, string>)ViewData["ItemTagsDictionary"]; }
-                            <p class="text-secondary">Tags: @itemTagsDictionary[item]</p>
+                            <p class="text-secondary">Tags: @Model.ItemTagsDictionary[item]</p>
                         </div>
                     </div>
                 </div>
             </div>
         }
     </div>
-    <div class="col-md-5 ml-5">
-        @foreach (var collection in (List<Collection>)ViewData["CollectionsWithMostItems"])
+<div class="col-lg-4 m-2 order-lg-2 order-md-1 order-sm-1 order-1">
+    <h3> Largest Collections </h3>
+    <section class="sticky-top">
+        @foreach (var collection in Model.CollectionsWithMostItems)
         {
             <div class="row jumbotron">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <h4>@collection.Name</h4>
+                            <h4>
+                                <a asp-controller="Collection" asp-action="Items" asp-route-collectionId="@collection.Id">
+                                    @collection.Name
+                                </a>
+                            </h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <span class="text-secondary">
+                            <h5 class="text-secondary">
                                 @collection.Theme
-                            </span>
+                            </h5>
                         </div>
                     </div>
                     <div class="row">
@@ -261,15 +252,57 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <p class="text-secondary">
-                                @collection.ShortDescription
+                            <p>
+                                @Html.Raw(collection.ShortDescription)
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         }
-    </div>
+    </section>
 </div>
+</div>
+<div class="row">
+    <div class="col-12">
+            <nav aria-label="pagination">
+                <ul class="pagination">
+                    @{
+                        var pageItemClasses = "page-item";
+                        if (!Model.PaginationModel.HasPreviousPage)
+                        {
+                            pageItemClasses += " disabled";
+                        }
+                    }
+                    <li class="@pageItemClasses">
+                        @{ var prevPage = Model.PaginationModel.PageNumber - 1; }
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@prevPage">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">
+                            @(Model.PaginationModel.PageNumber + 1)
+                        </a>
+                    </li>
+                    @{
+                        pageItemClasses = "page-item";
+                        if (!Model.PaginationModel.HasNextPage)
+                        {
+                            pageItemClasses += " disabled";
+                        }
+                    }
+                    <li class="@pageItemClasses">
+                        @{ var nextPage = Model.PaginationModel.PageNumber + 1; }
+                        <a class="page-link" asp-action="Index" asp-route-pageNumber="@nextPage">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>
 </div>

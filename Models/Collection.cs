@@ -17,15 +17,19 @@ namespace CollectionHub.Models
         
         [Display(Name = "Short description")]
         [Required(ErrorMessage = "Short description of the collection is not set")]
-        [StringLength(100, MinimumLength = 3, 
+        [StringLength(300, MinimumLength = 3, 
             ErrorMessage = "Short description of the collection cannot be shorter than 3 and less than 100 symbols")]
         public string ShortDescription { get; set; }
         
         [Display(Name = "Theme of the collection")]
         [Required(ErrorMessage = "Theme of the collection is not set")]
-        [StringLength(30, MinimumLength = 3, 
-            ErrorMessage = "Theme of the collection cannot be shorter than 3 and less than 30 symbols")]
         public string Theme { get; set; }
+
+        [NotMapped]
+        public static readonly List<string> AvailableThemes = new()
+        {
+            "Books", "Alcohol", "Electronics", "Fashion", "Sneakers", "VideoGames", "Food", "Marks", "Art"
+        };
 
         public List<Item> Items { get; } = new();
 

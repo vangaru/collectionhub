@@ -12,20 +12,142 @@
     <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="validation text-danger"></div>
+            <input asp-for="Item.Id" type="hidden">
             <div class="form-group">
                 <label asp-for="ApplicationUser.UserName"></label>
                 <input asp-for="ApplicationUser.UserName" class="form-control" disabled/>
             </div>
             <div class="form-group">
                 <label asp-for="Item.Name"></label>
-                <input asp-for="Input.Name" value="@Model.Item.Name" class="form-control">
-                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                <input asp-for="Item.Name" value="@Model.Item.Name" class="form-control">
+                <span asp-validation-for="Item.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Item.Tags"></label>
-                <input asp-for="Input.Tags" value="@Model.TagsString" class="form-control autocomplete">
-                <span asp-validation-for="Input.Tags" class="text-danger"></span>
-            </div>
+            @if (Model.Collection.FirstOptionalBoolFieldVisible)
+            {
+                <div class="form-check">
+                    <label asp-for="Item.FirstOptionalBoolField" class="form-check-label"></label>
+                    <input asp-for="Item.FirstOptionalBoolField" class="form-check-input" value="@Model.Item.FirstOptionalBoolField">
+                    <span asp-validation-for="Item.FirstOptionalBoolField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalBoolFieldVisible)
+            {
+                <div class="form-check">
+                    <label asp-for="Item.SecondOptionalBoolField" class="form-check-label"></label>
+                    <input asp-for="Item.SecondOptionalBoolField" class="form-check-input" value="@Model.Item.SecondOptionalBoolField">
+                    <span asp-validation-for="Item.FirstOptionalBoolField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalBoolFieldVisible)
+            {
+                <div class="form-check">
+                    <label asp-for="Item.ThirdOptionalBoolField" class="form-check-label"></label>
+                    <input asp-for="Item.ThirdOptionalBoolField" class="form-check-input" value="@Model.Item.ThirdOptionalBoolField">
+                    <span asp-validation-for="Item.ThirdOptionalBoolField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalDateTimeFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.FirstOptionalDateTimeField"></label>
+                    <input asp-for="Item.FirstOptionalDateTimeField" class="form-control" value="@Model.Item.FirstOptionalDateTimeField">
+                    <span asp-validation-for="Item.FirstOptionalDateTimeField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalDateTimeFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.SecondOptionalDateTimeField"></label>
+                    <input asp-for="Item.SecondOptionalDateTimeField" class="form-control" value="@Model.Item.SecondOptionalDateTimeField">
+                    <span asp-validation-for="Item.SecondOptionalDateTimeField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalDateTimeFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.ThirdOptionalDateTimeField"></label>
+                    <input asp-for="Item.ThirdOptionalDateTimeField" class="form-control" value="@Model.Item.ThirdOptionalDateTimeField">
+                    <span asp-validation-for="Item.ThirdOptionalDateTimeField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalNumberFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.FirstOptionalNumberField"></label>
+                    <input asp-for="Item.FirstOptionalNumberField" class="form-control" value="@Model.Item.FirstOptionalNumberField">
+                    <span asp-validation-for="Item.FirstOptionalNumberField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalNumberFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.SecondOptionalNumberField"></label>
+                    <input asp-for="Item.SecondOptionalNumberField" class="form-control" value="@Model.Item.SecondOptionalNumberField">
+                    <span asp-validation-for="Item.SecondOptionalNumberField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalNumberFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.ThirdOptionalNumberField"></label>
+                    <input asp-for="Item.ThirdOptionalNumberField" class="form-control" value="@Model.Item.ThirdOptionalNumberField">
+                    <span asp-validation-for="Item.ThirdOptionalNumberField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalStringFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.FirstOptionalStringField"></label>
+                    <input asp-for="Item.FirstOptionalStringField" class="form-control" value="@Model.Item.FirstOptionalStringField">
+                    <span asp-validation-for="Item.FirstOptionalStringField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalStringFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.SecondOptionalStringField"></label>
+                    <input asp-for="Item.SecondOptionalStringField" class="form-control" value="@Model.Item.SecondOptionalStringField">
+                    <span asp-validation-for="Item.SecondOptionalStringField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalStringFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.ThirdOptionalStringField"></label>
+                    <input asp-for="Item.ThirdOptionalStringField" class="form-control" value="@Model.Item.ThirdOptionalStringField">
+                    <span asp-validation-for="Item.ThirdOptionalStringField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.FirstOptionalTextFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.FirstOptionalTextField"></label>
+                    <textarea asp-for="Item.FirstOptionalTextField" class="form-control" value="@Html.Raw(Model.Item.FirstOptionalTextField)"></textarea>
+                    <span asp-validation-for="Item.FirstOptionalTextField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.SecondOptionalTextFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.SecondOptionalTextField"></label>
+                    <textarea asp-for="Item.SecondOptionalTextField" class="form-control" value="@Html.Raw(Model.Item.SecondOptionalTextField)"></textarea>
+                    <span asp-validation-for="Item.SecondOptionalTextField" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.Collection.ThirdOptionalTextFieldVisible)
+            {
+                <div class="form-group">
+                    <label asp-for="Item.ThirdOptionalTextField"></label>
+                    <textarea asp-for="Item.ThirdOptionalTextField" class="form-control" value="@Html.Raw(Model.Item.ThirdOptionalTextField)"></textarea>
+                    <span asp-validation-for="Item.ThirdOptionalTextField" class="text-danger"></span>
+                </div>
+            }
+            <script>
+                tinymce.init({
+                    selector: 'textarea',
+                    toolbar_mode: 'floating',
+                });
+            </script>
             <button type="submit" class="btn btn-success">Save</button>
         </form>
     </div>

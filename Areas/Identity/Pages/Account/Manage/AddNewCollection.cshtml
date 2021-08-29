@@ -1,4 +1,5 @@
 @page
+@using CollectionHub.Models
 @model CollectionHub.Areas.Identity.Pages.Account.Manage.AddNewCollection
 
 @{
@@ -23,12 +24,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Collection.Theme"></label>
-                <input asp-for="Collection.Theme" class="form-control">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" asp-for="Collection.Theme">Themes</label>
+                    </div>
+                    <select asp-items="new SelectList(@Collection.AvailableThemes)" asp-for="Collection.Theme" class="custom-select"></select>
+                </div>
                 <span asp-validation-for="Collection.Theme" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Collection.ShortDescription"></label>
-                <input asp-for="Collection.ShortDescription" class="form-control">
+                <textarea asp-for="Collection.ShortDescription" class="form-control"></textarea>
+                <script>
+                     tinymce.init({
+                         selector: 'textarea',
+                         toolbar_mode: 'floating',
+                     });
+                </script>
                 <span asp-validation-for="Collection.ShortDescription" class="text-danger"></span>
             </div>
             <label asp-for="Collection.ImageFile"></label>
@@ -160,7 +172,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Collection.ThirdOptionalTextFieldName"></label>
-                        <input asp-for="Collection.ThirdOptionalTextFieldName" class="form-control">
+                        <input asp-for="Collection.ThirdOptionalTextFieldName" class="form-control summernote"></input>
                         <span asp-validation-for="Collection.ThirdOptionalTextFieldName" class="text-danger"></span>
                     </div>
                 </div>

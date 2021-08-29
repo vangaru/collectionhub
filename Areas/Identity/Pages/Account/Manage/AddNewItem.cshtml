@@ -97,21 +97,27 @@
             @if (Model.Collection.FirstOptionalTextFieldVisible)
             {
                 <label for="first-optional-text-field">@Model.Collection.FirstOptionalTextFieldName</label>
-                <input asp-for="Input.FirstOptionalTextField" class="form-control" id="first-optional-text-field">
+                <textarea asp-for="Input.FirstOptionalTextField" class="form-control" id="first-optional-text-field"></textarea>
                 <span asp-validation-for="Input.FirstOptionalTextField" class="text-danger"></span>
             }
             @if (Model.Collection.SecondOptionalTextFieldVisible)
             {
                 <label for="second-optional-text-field">@Model.Collection.SecondOptionalTextFieldName</label>
-                <input asp-for="Input.SecondOptionalTextField" class="form-control" id="second-optional-text-field">
+                <textarea asp-for="Input.SecondOptionalTextField" class="form-control" id="second-optional-text-field"></textarea>
                 <span asp-validation-for="Input.SecondOptionalTextField" class="text-danger"></span>
             }
             @if (Model.Collection.ThirdOptionalTextFieldVisible)
             {
                 <label for="third-optional-text-field">@Model.Collection.ThirdOptionalTextFieldName</label>
-                <input asp-for="Input.ThirdOptionalTextField" class="form-control" id="third-optional-text-field">
+                <textarea asp-for="Input.ThirdOptionalTextField" class="form-control" id="third-optional-text-field"></textarea>
                 <span asp-validation-for="Input.ThirdOptionalTextField" class="text-danger"></span>
             }
+            <script>
+                tinymce.init({
+                    selector: 'textarea',
+                    toolbar_mode: 'floating',
+                });
+            </script>
             <button type="submit" class="btn btn-primary mt-2">Save</button>
         </form>
     </div>

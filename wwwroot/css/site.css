@@ -94,13 +94,3 @@ body {
   position: relative;
 }
 
-.scrolling-bar {
-  height: 100vh;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-}
-
-.scrolling-bar::-webkit-scrollbar {
-  width: 0;
-}

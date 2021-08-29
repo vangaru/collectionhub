@@ -3,14 +3,16 @@ using System;
 using CollectionHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CollectionHub.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210828182301_ThemesList")]
+    partial class ThemesList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,11 +80,12 @@ namespace CollectionHub.Data.Migrations
 
                     b.Property<string>("ShortDescription")
                         .IsRequired()
-                        .HasMaxLength(300)
+                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Theme")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ThirdOptionalBoolFieldName")
@@ -179,27 +182,6 @@ namespace CollectionHub.Data.Migrations
                     b.HasIndex("CollectionId");
 
                     b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("CollectionHub.Models.Like", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ItemId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("CollectionHub.Models.Tag", b =>
@@ -443,19 +425,6 @@ namespace CollectionHub.Data.Migrations
                         .HasForeignKey("CollectionId");
                 });
 
-            modelBuilder.Entity("CollectionHub.Models.Like", b =>
-                {
-                    b.HasOne("CollectionHub.Models.Item", null)
-                        .WithMany("Likes")
-                        .HasForeignKey("ItemId");
-
-                    b.HasOne("CollectionHub.Data.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CollectionHub.Models.Tag", b =>
                 {
                     b.HasOne("CollectionHub.Models.Item", null)
@@ -521,8 +490,6 @@ namespace CollectionHub.Data.Migrations
 
             modelBuilder.Entity("CollectionHub.Models.Item", b =>
                 {
-                    b.Navigation("Likes");
-
                     b.Navigation("Tags");
                 });
 

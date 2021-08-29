@@ -15,21 +15,17 @@ namespace CollectionHub.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _dbContext;
-        private readonly TagFormatter _tagFormatter;
 
         public ManageItem(UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _dbContext = dbContext;
-            _tagFormatter = new TagFormatter(_dbContext);
         }
-
-        [BindProperty]
-        public InputItemModel Input { get; init; }
-        public string TagsString { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         
+        [BindProperty]
         public Item Item { get; set; }
+        public Collection Collection { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -37,17 +33,12 @@ namespace CollectionHub.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            await LoadAsync(id);
-            
             if (!ModelState.IsValid) return Page();
+
+            _dbContext.Attach(Item).State = EntityState.Modified;
             
-            var tags = await ProcessTags();
-
-            Item.Name = Input.Name;
-            Item.Tags = tags;
-
             await _dbContext.SaveChangesAsync(); 
             
             return RedirectToPage();
@@ -57,7 +48,7 @@ namespace CollectionHub.Areas.Identity.Pages.Account.Manage
         {
             await LoadApplicationUser();
             LoadItem(id);
-            LoadTagsString();
+            LoadCollection(); ;
         }
 
         private async Task LoadApplicationUser()
@@ -73,18 +64,9 @@ namespace CollectionHub.Areas.Identity.Pages.Account.Manage
                 .FirstOrDefault();
         }
 
-        private void LoadTagsString()
+        private void LoadCollection()
         {
-            TagsString = _tagFormatter.GetTagsString(Item.Tags);
-        }
-        
-        private async Task<List<Tag>> ProcessTags()
-        {
-            var tagStrings = _tagFormatter.RemoveRepeatableTags(Input.Tags);
-
-            var tagsList = await _tagFormatter.AddOrIncrementTags(tagStrings);
-
-            return tagsList;
+            Collection = _dbContext.Collections.FirstOrDefault(c => c.Items.Contains(Item));
         }
     }
 }

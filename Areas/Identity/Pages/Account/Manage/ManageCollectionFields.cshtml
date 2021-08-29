@@ -28,7 +28,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Collection.ShortDescription"></label>
-                <input asp-for="Collection.ShortDescription" class="form-control" value="@Model.Collection.ShortDescription">
+                <textarea asp-for="Collection.ShortDescription" class="form-control" value="@Html.Raw(Model.Collection.ShortDescription)"></textarea>
+                <script>
+                    tinymce.init({
+                        selector: 'textarea',
+                        toolbar_mode: 'floating',
+                    });
+                </script>
                 <span asp-validation-for="Collection.ShortDescription" class="text-danger"></span>
             </div>
             <label asp-for="Collection.ImageFile"></label>

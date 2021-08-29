@@ -29,8 +29,10 @@
                         <a asp-page="ManageCollection" asp-all-route-data='new Dictionary<string, string> { { "id", collection.Id.ToString() } }'>
                             <h4>@collection.Name</h4>
                         </a>
-                        <h5 class="text-secondary">@collection.Theme</h5>
-                        <p class="text-secondary">@collection.ShortDescription</p>
+                        <p class="text-secondary">
+                            @collection.Theme
+                        </p>
+                        <p>@Html.Raw(collection.ShortDescription)</p>
                         <div class="form-check form-check-inline">
                             <input type="checkbox" name="selectedCollectionsIds" class="form-check-input" value="@collection.Id" id="@collection.Id">
                             <label class="form-check-label" for="@collection.Id">Delete collection</label>

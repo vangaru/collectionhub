@@ -12,20 +12,17 @@
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    @if (User.IsInRole("admin"))
-                    {
-                        <div class="col-12">
+                    <div class="col-8">
+                        <h4>@Model.Collection.Name</h4>
+                    </div>
+                    <div class="col-4">
+                        @if (User.IsInRole("admin"))
+                        {
                             <a asp-area="Identity" asp-page="/Account/Manage/ManageCollection" asp-all-route-data='new Dictionary<string, string> { { "id", Model.Collection.Id.ToString() } }'>
-                                <h4>@Model.Collection.Name</h4>
+                                <button type="button" class="btn btn-light"><i class="fa fa-solid fa-pencil"></i></button>
                             </a>
-                        </div>   
-                    }
-                    else
-                    {
-                        <div class="col-12">
-                            <h4>@Model.Collection.Name</h4>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -56,20 +53,24 @@
                     <div class="row jumbotron">
                         <div class="col-12">
                             <div class="row">
-                                @if (User.IsInRole("admin"))
-                                {
-                                    <a asp-area="Identity" asp-page="/Account/Manage/ManageItem" asp-all-route-data='new Dictionary<string, string> { { "id", item.Id.ToString() } }'>
-                                        <div class="col-sm-6">
-                                            <h5> @item.Name </h5>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h4>@item.Name</h4>
                                         </div>
-                                    </a>
-                                }
-                                else
-                                {
-                                    <div class="col-sm-6 text-right">
-                                        @item.PublicationDate.ToString("g")
+                                        <div class="col-4">
+                                            @if (User.IsInRole("admin"))
+                                            {
+                                                <a asp-area="Identity" asp-page="/Account/Manage/ManageItem" asp-all-route-data='new Dictionary<string, string> { { "id", item.Id.ToString() } }'>
+                                                    <button type="button" class="btn btn-light"><i class="fa fa-solid fa-pencil"></i></button>
+                                                </a>
+                                            }
+                                        </div>
                                     </div>
-                                }
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    @item.PublicationDate.ToString("g")
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -263,43 +264,45 @@
     <div class="row">
         <div class="col-12">
             <div class="row">
-                <nav aria-label="pagination">
-                    <ul class="pagination">
-                        @{
-                            var pageItemClasses = "page-item";
-                            if (!Model.PaginationModel.HasPreviousPage)
-                            {
-                                pageItemClasses += " disabled";
+                <div class="col-12">
+                    <nav aria-label="pagination">
+                        <ul class="pagination">
+                            @{
+                                var pageItemClasses = "page-item";
+                                if (!Model.PaginationModel.HasPreviousPage)
+                                {
+                                    pageItemClasses += " disabled";
+                                }
                             }
-                        }
-                        <li class="@pageItemClasses">
-                            @{ var prevPage = Model.PaginationModel.PageNumber - 1; }
-                            <a class="page-link" asp-action="Items" asp-route-collectionId="@Model.Collection.Id" asp-route-pageNumber="@prevPage">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">
-                                @(Model.PaginationModel.PageNumber + 1)
-                            </a>
-                        </li>
-                        @{
-                            pageItemClasses = "page-item";
-                            if (!Model.PaginationModel.HasNextPage)
-                            {
-                                pageItemClasses += " disabled";
+                            <li class="@pageItemClasses">
+                                @{ var prevPage = Model.PaginationModel.PageNumber - 1; }
+                                <a class="page-link" asp-action="Items" asp-route-collectionId="@Model.Collection.Id" asp-route-pageNumber="@prevPage">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">
+                                    @(Model.PaginationModel.PageNumber + 1)
+                                </a>
+                            </li>
+                            @{
+                                pageItemClasses = "page-item";
+                                if (!Model.PaginationModel.HasNextPage)
+                                {
+                                    pageItemClasses += " disabled";
+                                }
                             }
-                        }
-                        <li class="@pageItemClasses">
-                            @{ var nextPage = Model.PaginationModel.PageNumber + 1; }
-                            <a class="page-link" asp-action="Items" asp-route-collectionId="@Model.Collection.Id" asp-route-pageNumber="@nextPage">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                            <li class="@pageItemClasses">
+                                @{ var nextPage = Model.PaginationModel.PageNumber + 1; }
+                                <a class="page-link" asp-action="Items" asp-route-collectionId="@Model.Collection.Id" asp-route-pageNumber="@nextPage">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

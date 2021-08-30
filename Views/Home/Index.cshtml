@@ -20,6 +20,16 @@
                 </div>
                 <div class="col-sm-5 text-secondary">
                     <div class="row">
+                        @if (User.IsInRole("admin"))
+                        {
+                            <div class="col-12">
+                                <a asp-area="Identity" asp-page="/Account/Manage/ManageCollection" asp-all-route-data='new Dictionary<string, string> { { "id", collection.Id.ToString() } }'>
+                                    <button type="button" class="btn btn-light btn-block">
+                                        <i class="fa fa-solid fa-pencil"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        }
                         <div class="col-12">
                             <h4>
                                 <a asp-controller="Collection" asp-action="Items" asp-route-collectionId="@collection.Id">
@@ -31,6 +41,18 @@
                     </div>
                 </div>
                 <div class="col-sm-7">
+                    @if (User.IsInRole("admin"))
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <a asp-area="Identity" asp-page="/Account/Manage/ManageItem" asp-all-route-data='new Dictionary<string, string> { { "id", item.Id.ToString() } }'>
+                                    <button type="button" class="btn btn-light btn-block">
+                                        <i class="fa fa-solid fa-pencil"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-sm-5">
                             <h5> @item.Name </h5>
@@ -218,7 +240,7 @@
                             <p class="text-secondary">Tags: @Model.ItemTagsDictionary[item]</p>
                         </div>
                     </div>
-                </div>
+                     </div>
             </div>
         }
     </div>
@@ -229,6 +251,18 @@
         {
             <div class="row jumbotron">
                 <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            @if (User.IsInRole("admin"))
+                            {
+                                <a asp-area="Identity" asp-page="/Account/Manage/ManageCollection" asp-all-route-data='new Dictionary<string, string> { { "id", collection.Id.ToString() } }'>
+                                    <button type="button" class="btn btn-light btn-block">
+                                        <i class="fa fa-solid fa-pencil"></i>
+                                    </button>
+                                </a>
+                            }
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-12">
                             <h4>

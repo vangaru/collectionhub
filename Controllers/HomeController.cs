@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CollectionHub.Areas.Identity.Pages.Account.Manage;
 using CollectionHub.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +15,11 @@ namespace CollectionHub.Controllers
         private readonly TagFormatter _tagFormatter;
         private readonly List<Item> _items;
         private readonly List<ApplicationUser> _applicationUsers;
-        private readonly UserManager<ApplicationUser> _userManager;
 
         public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
             _tagFormatter = new TagFormatter(_dbContext);
-            _userManager = userManager;
             _items = _dbContext.Items
                 .Include(i => i.Tags)
                 .OrderByDescending(i => i.PublicationDate).ToList();

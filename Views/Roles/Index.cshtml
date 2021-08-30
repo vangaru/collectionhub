@@ -6,6 +6,13 @@
     {
         <tr>
             <td>@role.Name</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </form>
+            </td>
         </tr>
     }
 </table>

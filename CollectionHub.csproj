@@ -12,6 +12,9 @@
     <ItemGroup>
         <PackageReference Include="Google.Cloud.Storage.V1" Version="3.5.0" />
         <PackageReference Include="jQuery.Ajax.Unobtrusive" Version="2.0.20710" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="5.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />

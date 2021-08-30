@@ -3,15 +3,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using CollectionHub.Data;
 using CollectionHub.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollectionHub.Controllers
 {
+    [Authorize(Roles="admin")]
     public class RolesController : Controller
     {
-        private RoleManager<IdentityRole> _roleManager;
-        private UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public RolesController(RoleManager<IdentityRole> roleManager, 
             UserManager<ApplicationUser> userManager)
@@ -30,6 +32,18 @@ namespace CollectionHub.Controllers
         {
             if (string.IsNullOrEmpty(roleName)) return View();
             await _roleManager.CreateAsync(new IdentityRole(roleName));
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                await _roleManager.DeleteAsync(role);
+            }
+
             return RedirectToAction("Index");
         }
 

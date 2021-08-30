@@ -1,28 +1,15 @@
 @using CollectionHub.Data
-@inject SignInManager<ApplicationUser> _signInManager
+@inject SignInManager<ApplicationUser> SignInManager
 @{
-    var hasExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 <ul class="nav nav-pills flex-column">
-    <li class="nav-item">
-        <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @ManageNavPages.AddNewCollectionNavClass(ViewContext)" id="add-new-collection" asp-page="./AddNewCollection">Add new collection</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @ManageNavPages.ManageCollectionsNavClass(ViewContext)" id="manage-collections" asp-page="./ManageCollections">Manage collections</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a>
-    </li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.AddNewCollectionNavClass(ViewContext)" id="add-new-collection" asp-page="./AddNewCollection">Add New Collection</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ManageCollectionsNavClass(ViewContext)" id="manage-collections" asp-page="./ManageCollections">Manage Collections</a></li>
     @if (hasExternalLogins)
     {
-        <li id="external-logins" class="nav-item">
-            <a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a>
-        </li>
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
 </ul>

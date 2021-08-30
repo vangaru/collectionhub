@@ -1,13 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using CollectionHub.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CollectionHub.Areas.Identity.Pages.Account.Manage
 {
-    public partial class IndexModel : PageModel
+    [Authorize(Roles="user, admin")]
+    public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
